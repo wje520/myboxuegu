@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学IT - 后台管理系统</title>
+    <!--build:style-->
+    <!--endbuild-->
+</head>
+<body>
+    <!-- 侧边栏 -->
+    <!--build:aside-->
+    <!--endbuild-->
+    <!-- 主体 -->
+    <div class="main">
+        <div class="container-fluid">
+            <!-- 头部 -->
+            <!--build:header-->
+            <!--endbuild-->
+            <div class="body course-category">
+                <!-- 面包屑 -->
+                <ol class="breadcrumb">
+                    <li><a href="javascript:;">学科管理</a></li>
+                    <li class="active">编辑学科</li>
+                </ol>
+                <div class="category-edit category-add">
+                   <!-- 学科编辑模板的坑-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/dist/js/lib.js"></script>
+    <script src="/dist/js/category/edit.js"></script>
+
+    <!--学科编辑模板-->
+    <!--模板中的循环有名字时，用名字，没有 名字是用 $data-->
+    <script type="text/template" id="category-edit-tpl">
+        <form action="/v6/category/modify" method="post" class="form-horizontal" id="category-edit-form">
+            <div class="form-group">
+                <input type="hidden" name="cg_id" value="{{cg_id}}"/>
+                <label for="" class="col-xs-4 control-label">名称</label>
+                <div class="col-xs-3">
+                    <input name="cg_name" value="{{cg_name}}" type="text" class="form-control input-sm" placeholder="填写分类名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-4 control-label">所属分类</label>
+                <div class="col-xs-2">
+                    <select name="cg_pid" class="form-control input-sm">
+                        <option value="0">顶级学科</option>
+                        {{each top categoryTop i}}
+                        <option value="{{categoryTop.cg_id}}" {{cg_pid==categoryTop.cg_id?'selected':''}}>{{categoryTop.cg_name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-4 control-label">排序</label>
+                <div class="col-xs-1">
+                    <input name="cg_order" value="{{cg_order}}" type="text" class="form-control input-sm" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-4 control-label">是否显示</label>
+                <div class="col-xs-3">
+                    <label class="checkbox-inline">
+                        <input name="cg_is_hide" value="0" type="radio" {{cg_is_hide==0?'checked':''}}> 是
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="cg_is_hide" value="1" type="radio" {{cg_is_hide!=0?'checked':''}}> 否
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-8">
+                    <button type="submit" class="btn btn-success btn-sm pull-right" >保 存</button>
+                </div>
+            </div>
+        </form>
+</script>
+</body>
+</html>

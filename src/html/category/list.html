@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学IT - 后台管理系统</title>
+    <!--build:style-->
+    <!--endbuild-->
+</head>
+<body>
+    <!-- 侧边栏 -->
+    <!--build:aside-->
+    <!--endbuild-->
+    <!-- 主体 -->
+    <div class="main">
+        <div class="container-fluid">
+            <!-- 头部 -->
+
+            <!--build:header-->
+            <!--endbuild-->
+
+            <div class="body course-category">
+                <!-- 面包屑 -->
+                <ol class="breadcrumb">
+                    <li><a href="javascript:;">学科管理</a></li>
+                    <li class="active">学科分类</li>
+                </ol>
+                <div class="panel panel-default">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="18%">分类名称</th>
+                                <th>课程数量</th>
+                                <th>是否显示</th>
+                                <th>排序</th>
+                                <th width="10%">操作</th>
+                            </tr>
+                        </thead>
+                        <!--学科列表模板-->
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/dist/js/lib.js"></script>
+    <script src="/dist/js/category/list.js"></script>
+
+  <!--学科列表模板-->
+    <!--这里的i是索引下标-->
+    <script type="text/template" id="category-list-tpl">
+
+        <tbody>
+        {{each $data category i}}
+        <tr class="{{category.cg_pid==0?'active':''}}">
+            {{if category.cg_pid==0}}
+            <td class="text-left">{{category.cg_name}}</td>
+            {{/if}}
+            {{if category.cg_pid!=0}}
+            <td class="text-left">&nbsp;&nbsp;├ &nbsp;{{category.cg_name}}</td>
+            {{/if}}
+            <td>{{category.cg_order}}</td>
+            <td>{{category.cg_is_hide==0?'是':'否'}}</td>
+            <td>{{category.level}}</td>
+            <td>
+                <a href="/dist/html/category/edit.html?cg_id={{category.cg_id}}" class="btn btn-info btn-xs">编辑</a>
+            </td>
+        </tr>
+        {{/each}}
+        </tbody>
+
+</script>
+</body>
+</html>

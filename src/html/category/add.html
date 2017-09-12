@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学IT - 后台管理系统</title>
+    <!--build:style-->
+    <!--endbuild-->
+</head>
+<body>
+    <!-- 侧边栏 -->
+
+    <!--build:aside-->
+    <!--endbuild-->
+
+    <!-- 主体 -->
+    <div class="main">
+        <div class="container-fluid">
+            <!-- 头部 -->
+
+            <!--build:header-->
+            <!--endbuild-->
+
+            <div class="body course-category">
+                <!-- 面包屑 -->
+                <ol class="breadcrumb">
+                    <li><a href="javascript:;">学科管理</a></li>
+                    <li class="active">添加学科</li>
+                </ol>
+                <div class="category-add">
+                    <form action="/v6/category/add" method="post" class="form-horizontal" id="category-add-form">
+                        <div class="form-group">
+                            <label for="" class="col-xs-4 control-label">名称</label>
+                            <div class="col-xs-3">
+                                <input name="cg_name" type="text" class="form-control input-sm" placeholder="填写分类名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-xs-4 control-label">所属分类</label>
+                            <div class="col-xs-2">
+                                <select name="cg_pid" class="form-control input-sm" id="category-top-select">
+                                   <!-- 通过模板引擎动态获取来至后台接口返回的下拉列表数据-->
+                                    <!-- select模板的坑-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-xs-4 control-label">排序</label>
+                            <div class="col-xs-1">
+                                <input name="cg_order" type="text" class="form-control input-sm" value="10">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-xs-4 control-label">是否显示</label>
+                            <div class="col-xs-3">
+                                <label class="checkbox-inline">
+                                    <input name="cg_is_hide" value="0" type="radio" checked> 是
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input name="cg_is_hide" value="1" type="radio"> 否
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-8">
+                                <button type="submit" class="btn btn-success btn-sm pull-right">保 存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/dist/js/lib.js"></script>
+    <script src="/dist/js/category/add.js"></script>
+    <!--select下拉列表模板-->
+
+    <!--这里的value值为什么写的是id呢？后台规定这么传吗？-->
+    <script type="text/template" id="select-top-tpl">
+        <option value="0">顶级学科</option>
+        {{each $data categoryTop  i}}
+        <option value="{{categoryTop.cg_id}}">{{categoryTop.cg_name}}</option>
+        {{/each}}
+</script>
+</body>
+</html>
