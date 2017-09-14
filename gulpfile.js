@@ -26,7 +26,9 @@ gulp.task('html', function () {
         .pipe(htmlReplace({
             style:gulp.src('src/html/common/style.html'),
             aside:gulp.src('src/html/common/aside.html'),
-            header:gulp.src('src/html/common/header.html')
+            header:gulp.src('src/html/common/header.html'),
+            courseEditHeader:gulp.src('src/html/common/course/header.html'),//提取课程编辑公共头部和侧边栏
+            courseEditAside:gulp.src('src/html/common/course/aside.html')
         }))
         .pipe(htmlmin({
             collapseWhitespace: true,
@@ -137,7 +139,7 @@ gulp.task('build', function () {
 //watch监听文件变化
 gulp.task('default', function () {
 
-    gulp.watch('**/*.html', function () {
+    gulp.watch('src/**/*.html', function () {
         gulp.run('html');
     });
     gulp.watch('src/less/index.less', function () {
